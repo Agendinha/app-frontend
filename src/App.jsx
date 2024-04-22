@@ -1,10 +1,9 @@
 import './App.css'
+import MainRouter from './router';
 function App() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">
-      Agendinha
-      </h1>
+      <MainRouter />
     </>
   )
 }
