@@ -13,6 +13,7 @@
 
 ### Frontend
 - React com javascript
+- TailwindCSS
 - Vite
 
 ## Idealização do projeto
@@ -32,3 +33,5 @@ O projeto será uma aplicação WEB para gerenciar agendas, de qualquer tipo de 
         - Pode desmarcar seu próprio agendamento
 - Agenda
     - Padrão de segunda a sexta das 9 as 18.
+
+---
