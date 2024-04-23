@@ -4,9 +4,9 @@ import { Card, CardContent } from "@/components/ui/card";
 
 function AuthWrapper({ children }) {
 	return (
-		<div className="flex flex-col items-center gap-4">
+		<div className="flex flex-col items-center gap-4 w-full">
 			<Logo width="300" />
-			<Card className="bg-[#aaa] w-full max-w-lg p-4 rounded-xl shadow-md">
+			<Card className="bg-[#aaa] w-96 max-w-lg p-4 rounded-xl shadow-md">
 				<CardContent>{children}</CardContent>
 			</Card>
 		</div>

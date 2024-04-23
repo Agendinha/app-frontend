@@ -59,6 +59,15 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.radio-checked::after {
+  background-color: #E67D3C;
+  content: '';
+  display: block;
+  width: 1em;
+  height: 1em;
+  border-radius: 9999px;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
