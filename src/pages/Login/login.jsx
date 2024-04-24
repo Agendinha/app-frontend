@@ -6,17 +6,35 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [rememberMe, setRemember] = useState(false);
 
-  const handleLogin = () => {
-    console.log('Email:', email);
-    console.log('Senha:', password);
-    console.log('Lembrar-me:', rememberMe);
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Evita que o formulário seja submetido normalmente
+
+    try {
+      const response = await fetch('https://api.agendinha.online/api/v1/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        // Lógica para lidar com o login bem-sucedido
+        console.log('Login bem-sucedido!');
+      } else {
+        // Lógica para lidar com falha no login
+        console.error('Falha no login.');
+      }
+    } catch (error) {
+      console.error('Erro ao enviar requisição de login:', error);
+    }
   };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen bg-orange-200 text-black">
       <Logo />
       <div className="flex flex-col w-5/12">
-        <form action="login" className="flex flex-col">
+        <form className="flex flex-col" onSubmit={handleLogin}>
           <div className="flex flex-col relative p-2">
             <label htmlFor="email" className="absolute left-4 top-0 text-sm text-black">E-mail</label>
             <input
@@ -43,10 +61,10 @@ export default function Login() {
             <input 
               id="remember" 
               type="checkbox" 
-              className=" mr-2"
-              value={rememberMe}
+              className="mr-2"
+              checked={rememberMe}
               onChange={() => setRemember(!rememberMe)}
-              />
+            />
             <label htmlFor="remember" className="text-sm">Lembrar-me</label>
           </div>
           <div className="flex flex-col p-2">
@@ -61,6 +79,5 @@ export default function Login() {
         </form>
       </div>
     </div>
-
   )
 }
