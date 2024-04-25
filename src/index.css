@@ -28,6 +28,7 @@ a:hover {
 
 body {
   margin: 0;
+  background-color: #FFE7D8;
   display: flex;
   place-items: center;
   min-width: 320px;
@@ -56,6 +57,15 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.radio-checked::after {
+  background-color: #E67D3C;
+  content: '';
+  display: block;
+  width: 1em;
+  height: 1em;
+  border-radius: 9999px;
 }
 
 @media (prefers-color-scheme: light) {
