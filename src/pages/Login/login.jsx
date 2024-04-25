@@ -1,13 +1,16 @@
 import { useState } from "react";
 import Logo from "../../assets/logo";
+// import {Navigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRemember] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault(); // Evita que o formulário seja submetido normalmente
+    e.preventDefault();
 
     try {
       const response = await fetch('https://api.agendinha.online/api/v1/login/', {
@@ -19,10 +22,16 @@ export default function Login() {
       });
 
       if (response.ok) {
-        // Lógica para lidar com o login bem-sucedido
         console.log('Login bem-sucedido!');
+
+
+        const data = await response.json();
+        localStorage.setItem('access_token', data.access_token);
+
+        return navigate('/');
+
       } else {
-        // Lógica para lidar com falha no login
+
         console.error('Falha no login.');
       }
     } catch (error) {
@@ -58,9 +67,9 @@ export default function Login() {
             />
           </div>
           <div className="flex flex-row p-2">
-            <input 
-              id="remember" 
-              type="checkbox" 
+            <input
+              id="remember"
+              type="checkbox"
               className="mr-2"
               checked={rememberMe}
               onChange={() => setRemember(!rememberMe)}
