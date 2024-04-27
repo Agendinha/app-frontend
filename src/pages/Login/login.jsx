@@ -1,17 +1,21 @@
 import { useState } from "react";
 import Logo from "../../assets/logo";
+import { Loader2 } from "lucide-react";
 // import {Navigate} from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import Modal from "@/components/modal/modal";
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRemember] = useState(false);
   const navigate = useNavigate();
+  const [isOpen, setModalIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     try {
       const response = await fetch('https://api.agendinha.online/api/v1/login/', {
         method: 'POST',
@@ -33,6 +37,9 @@ export default function Login() {
       } else {
 
         console.error('Falha no login.');
+
+        setModalIsOpen(true);
+
       }
     } catch (error) {
       console.error('Erro ao enviar requisição de login:', error);
@@ -41,6 +48,13 @@ export default function Login() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen bg-orange-200 text-black">
+      <Modal
+        isOpen={isOpen}
+        setModalIsOpen={() => setModalIsOpen(!isOpen)}
+        textModal="Email ou senha inválidos!!!"
+        buttonSuccess="Tentar novamente"
+        successFunction={() => setModalIsOpen(!isOpen, setIsLoading(false) )}
+      />
       <Logo />
       <div className="flex flex-col w-5/12">
         <form className="flex flex-col" onSubmit={handleLogin}>
@@ -76,14 +90,21 @@ export default function Login() {
             />
             <label htmlFor="remember" className="text-sm">Lembrar-me</label>
           </div>
-          <div className="flex flex-col p-2">
+          <div className="flex flex-col p-2 justify-center">
             <button
-              className="bg-orange-500 p-3 mb-2 rounded-md text-white"
+              className="bg-orange-400 p-3 mb-2 rounded-md text-white"
               type="submit"
               onClick={handleLogin}
+              disabled={isLoading}
             >
-              Entrar
-            </button>
+              <div className="flex justify-center">
+              { isLoading ?
+               <Loader2 className="animate-spin h-6 w-6 text-white" />
+               : 'Entrar'
+              }
+              </div>
+              </button>
+              <p className="text-center">Ainda não possui cadastro? <a href="/register">Clique aqui</a></p>
           </div>
         </form>
       </div>
