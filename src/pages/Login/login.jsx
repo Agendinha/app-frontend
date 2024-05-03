@@ -1,16 +1,13 @@
 import { useState } from "react";
 import Logo from "../../assets/logo";
 import { Loader2 } from "lucide-react";
-// import {Navigate} from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-import Modal from "@/components/modal/modal";
-
+import swal from "sweetalert";
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRemember] = useState(false);
   const navigate = useNavigate();
-  const [isOpen, setModalIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async (e) => {
@@ -38,23 +35,18 @@ export default function Login() {
 
         console.error('Falha no login.');
 
-        setModalIsOpen(true);
+        swal('Erro', 'Email ou senha inválidos!', 'error');
+        setIsLoading(false);
 
       }
     } catch (error) {
       console.error('Erro ao enviar requisição de login:', error);
+      swal('Erro', 'Erro interno! Tente novamente mais tarde', 'error');
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen bg-orange-200 text-black">
-      <Modal
-        isOpen={isOpen}
-        setModalIsOpen={() => setModalIsOpen(!isOpen)}
-        textModal="Email ou senha inválidos!!!"
-        buttonSuccess="Tentar novamente"
-        successFunction={() => setModalIsOpen(!isOpen, setIsLoading(false) )}
-      />
       <Logo />
       <div className="flex flex-col w-5/12">
         <form className="flex flex-col" onSubmit={handleLogin}>
