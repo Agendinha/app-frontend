@@ -31,8 +31,7 @@ jobs:
           npm install --save-dev mochawesome-merge
           npm install --save-dev mochawesome-report-generator
       
-      - name: Run application
-        run: npm run dev
-
-      - name: Run unit tests
-        run: npm run test
+      - name: Run application and tests
+        run: 
+          npm run dev
+          npm run test
