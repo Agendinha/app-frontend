@@ -1,3 +1,5 @@
+[![Deploy](https://github.com/Agendinha/app-frontend/actions/workflows/deploy_prod.yml/badge.svg)](https://github.com/Agendinha/app-frontend/actions/workflows/deploy_prod.yml)
+
 # app-frontend
 
 ## Equipe
