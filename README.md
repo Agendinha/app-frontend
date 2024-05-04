@@ -35,3 +35,20 @@ O projeto será uma aplicação WEB para gerenciar agendas, de qualquer tipo de 
     - Padrão de segunda a sexta das 9 as 18.
 
 ---
+
+# Execução do projeto
+
+## Execução local
+~~~bash
+npm run dev
+~~~
+
+## Execução testes com interface do Cypress
+~~~bash
+npm run test:ci
+~~~
+
+## Execução testes via terminal do Cypress
+~~~bash
+npm run test:ci
+~~~
