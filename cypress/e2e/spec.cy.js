@@ -7,4 +7,12 @@ describe('Testes de login:', () => {
     cy.get('.swal-title').should('have.text', 'Erro')
     cy.get('.swal-text').should('have.text', 'Email ou senha inválidos!')
   })
+  it('Login com sucesso!', () => {
+    cy.visit('http://localhost:5173/')
+    cy.get('#email').type('teste@teste.com')
+    cy.get('#password').type('teste')
+    cy.get('.bg-orange-400 > .flex').click()
+    cy.get('button').click()
+    cy.get('.text-xl').should('have.text', 'Login bem sucedido!')
+  })
 })
