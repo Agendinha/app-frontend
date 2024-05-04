@@ -1,4 +1,4 @@
-name: Deploy
+name: Tests
 
 on:
   push:
@@ -31,7 +31,11 @@ jobs:
           npm install --save-dev mochawesome-merge
           npm install --save-dev mochawesome-report-generator
       
-      - name: Run application and tests
-        run: 
-          npm run dev
-          npm run test
+      - name: Run application
+        run: npm run dev &
+      
+      - name: Wait 10 seconds
+        run: sleep 10
+      
+      - name: Run tests
+        run: npm run test
