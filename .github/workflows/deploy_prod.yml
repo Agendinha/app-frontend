@@ -23,13 +23,13 @@ jobs:
 
       - name: Install cypress and dependencies
         run: 
-          npm install --save-dev cypress
-          npm install --save-dev cypress
-          npm install --save-dev cypress
-          npm install --save-dev cypress-mochawesome-reporter
-          npm install --save-dev mochawesome
-          npm install --save-dev mochawesome-merge
-          npm install --save-dev mochawesome-report-generator
+          npm install cypress
+          npm install cypress-mochawesome-reporter
+          npm install mochawesome
+          npm install mochawesome-merge
+          npm install mochawesome-report-generator
       
       - name: Run tests
-        run: npm run test
+        run:
+          npm i 
+          npm run test
