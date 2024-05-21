@@ -12,6 +12,7 @@ function Dashboard() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen bg-orange-200">
+      <h1 className="text-2xl">Dashboard</h1>
        <button
         onClick={() => setModalIsOpen(true)}
        >
