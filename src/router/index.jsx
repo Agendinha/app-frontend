@@ -8,7 +8,10 @@ function MainRouter() {
 	return (
 		<BrowserRouter>
 			<Routes>
+				{/* Home Route */}
 				<Route path="/" element={<Home />} />
+
+				{/* Auth Routes */}
 				<Route
 					path="/login"
 					element={
@@ -25,7 +28,16 @@ function MainRouter() {
 						</ProtectedRoute>
 					}
 				/>
-				<Route path="/dashboard" element={<Dashboard />} />
+
+				{/* App Routes */}
+				<Route
+					path="/dashboard"
+					element={
+						<AuthenticatedRoute>
+							<Dashboard />
+						</AuthenticatedRoute>
+					}
+				/>
 			</Routes>
 		</BrowserRouter>
 	);
@@ -53,6 +65,19 @@ function ProtectedRoute({ children }) {
 		const token = localStorage.getItem("access_token");
 		if (token) {
 			navigate("/dashboard");
+		}
+	}, [navigate]);
+
+	return children;
+}
+
+function AuthenticatedRoute({ children }) {
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		const token = localStorage.getItem("access_token");
+		if (!token) {
+			navigate("/login");
 		}
 	}, [navigate]);
 

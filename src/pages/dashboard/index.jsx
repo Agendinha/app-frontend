@@ -3,19 +3,27 @@ import { useState } from "react"
 
 function Dashboard() {
   const [isOpen, setModalIsOpen] = useState(false)
+
+  const logout = () => {
+    localStorage.removeItem("access_token")
+    setModalIsOpen(false)
+    window.location.href = "/login"
+  }
+
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen bg-orange-200">
+      <h1 className="text-2xl">Dashboard</h1>
        <button
         onClick={() => setModalIsOpen(true)}
        >
-        Modal
+        Logout
         </button>
        <Modal
        isOpen={isOpen}
        setModalIsOpen={() => setModalIsOpen(!isOpen)}
-       textModal="Login bem sucedido!"
+       textModal="Logout feito com sucesso!"
        buttonSuccess="Fechar"
-       successFunction={() => setModalIsOpen(!isOpen)}
+       successFunction={() => logout()}
        />
       
     </div>

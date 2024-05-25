@@ -1,0 +1,35 @@
+name: Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    name: Running unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Use Node.js 20.11.1
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.11.1'
+      
+      - name: Install dependencies
+        run: npm i
+
+      - name: Install cypress and dependencies
+        run: 
+          npm install cypress
+          npm install cypress-mochawesome-reporter
+          npm install mochawesome
+          npm install mochawesome-merge
+          npm install mochawesome-report-generator
+      
+      - name: Run tests
+        run:
+          npm i 
+          npm run test
