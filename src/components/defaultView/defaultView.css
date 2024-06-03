@@ -1,0 +1,50 @@
+.default-view {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 300px;
+  transition: transform 0.3s;
+  z-index: 1000;
+  background-color: white;
+  border-right: 1px solid #ccc;
+}
+
+.sidebar.closed {
+  transform: translateX(-300px);
+}
+
+.content-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  transition: margin-left 0.3s;
+  margin-top: 60px; /* Adjust based on navbar height */
+}
+
+.content-container.shifted {
+  margin-left: 300px;
+}
+
+.content-inner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
