@@ -9,7 +9,7 @@
 
   color-scheme: light;
   color: black;
-  background-color: #FFE7D8;
+  background-color: #FFF7ED;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -28,7 +28,7 @@ a:hover {
 
 body {
   margin: 0;
-  background-color: #FFE7D8;
+  background-color: #FFF7ED;
   display: flex;
   place-items: center;
   min-width: 320px;
