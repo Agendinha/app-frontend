@@ -14,7 +14,7 @@ function Dashboard() {
 
 	return (
 		<DefaultView>
-			<div className="flex flex-col items-center justify-center h-full w-screen bg-orange-50">
+			<div className="flex flex-col items-center justify-center h-full w-screen bg-orange-50 ">
 				{/* <h1 className="text-2xl">Dashboard</h1> */}
 				{/* <button onClick={() => setModalIsOpen(true)}>Logout</button> */}
 				<Calendar />
