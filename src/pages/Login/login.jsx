@@ -6,7 +6,6 @@ import swal from "sweetalert";
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [rememberMe, setRemember] = useState(false);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -14,7 +13,7 @@ export default function Login() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await fetch('https://api.agendinha.online/api/v1/login/', {
+      const response = await fetch('http://localhost:8001/api/v1/login/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -27,8 +26,12 @@ export default function Login() {
 
 
         const data = await response.json();
+        const user = data.user;
         localStorage.setItem('access_token', data.access_token);
-
+        localStorage.setItem('userId', user.id);
+        localStorage.setItem('usertype', user.usertype);
+        localStorage.setItem('username', user.username);
+        localStorage.setItem('userEmail', user.email);
         return navigate('/');
 
       } else {
@@ -71,16 +74,6 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-          </div>
-          <div className="flex flex-row p-2">
-            <input
-              id="remember"
-              type="checkbox"
-              className="mr-2"
-              checked={rememberMe}
-              onChange={() => setRemember(!rememberMe)}
-            />
-            <label htmlFor="remember" className="text-sm">Lembrar-me</label>
           </div>
           <div className="flex flex-col p-2 justify-center">
             <button
