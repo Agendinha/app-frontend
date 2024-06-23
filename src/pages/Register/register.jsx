@@ -5,12 +5,10 @@ import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
 export default function Login() {
-	const [nomeCompleto, setNomeCompleto] = useState("");
+	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassowrd, setConfirmPassword] = useState("");
-	const [phone, setPhone] = useState("");
-	const [userType, setUserType] = useState("Cliente");
 	const navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -23,14 +21,19 @@ export default function Login() {
 				setIsLoading(false);
 				return;
 			}
+			if(username.includes(" ")){
+				swal("Ops!", "O nome de usuário não pode conter espaços!", "error");
+				setIsLoading(false);
+				return;
+			}
 			const response = await fetch(
-				"https://api.agendinha.online/api/v1/register/",
+				"https://api.agendinha.online/api/v1/",
 				{
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
 					},
-					body: JSON.stringify({ nomeCompleto, email, password, phone, userType}),
+					body: JSON.stringify({ username, email, password, usertype:"cliente"}),
 				}
 			);
 
@@ -66,18 +69,18 @@ export default function Login() {
 				<form className="flex flex-col" onSubmit={handleRegister}>
 				<div className="flex flex-col relative p-2">
 						<label
-							htmlFor="nomeCompleto"
+							htmlFor="username"
 							className="absolute left-4 top-0 text-sm text-black"
 						>
-							Nome completo
+							Usuário
 						</label>
 						<input
-							id="nomeCompleto"
+							id="username"
 							className="bg-white p-3 mb-2 rounded-md text-black"
 							type="text"
-							placeholder="John doe"
-							value={nomeCompleto}
-							onChange={(e) => setNomeCompleto(e.target.value)}
+							placeholder="johnDoe"
+							value={username}
+							onChange={(e) => setUsername(e.target.value)}
 						/>
 					</div>
 					<div className="flex flex-col relative p-2">
@@ -127,39 +130,6 @@ export default function Login() {
 							value={confirmPassowrd}
 							onChange={(e) => setConfirmPassword(e.target.value)}
 						/>
-					</div>
-					<div className="flex flex-col relative p-2">
-						<label
-							htmlFor="phone"
-							className="absolute left-4 top-0 text-sm text-black"
-						>
-							Telefone
-						</label>
-						<input
-							id="phone"
-							className="bg-white p-3 mb-2 rounded-md text-black"
-							type="text"
-							placeholder="35987654321"
-							value={phone}
-							onChange={(e) => setPhone(e.target.value)}
-						/>
-					</div>
-					<div className="flex flex-col relative p-2">
-						<label
-							htmlFor="userType"
-							className="absolute left-4 top-0 text-sm text-black"
-						>
-							Tipo de usuário
-						</label>
-						<select
-							id="userType"
-							className="bg-white p-3 mb-2 rounded-md text-black"
-							value={userType}
-							onChange={(e) => setUserType(e.target.value)}
-						>
-							<option value="Cliente">Cliente</option>
-							<option value="Parceiro">Parceiro</option>
-						</select>
 					</div>
 					<div className="flex flex-col p-2 justify-center">
 						<button
