@@ -6,7 +6,6 @@ import swal from "sweetalert";
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [rememberMe, setRemember] = useState(false);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -71,16 +70,6 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-          </div>
-          <div className="flex flex-row p-2">
-            <input
-              id="remember"
-              type="checkbox"
-              className="mr-2"
-              checked={rememberMe}
-              onChange={() => setRemember(!rememberMe)}
-            />
-            <label htmlFor="remember" className="text-sm">Lembrar-me</label>
           </div>
           <div className="flex flex-col p-2 justify-center">
             <button
