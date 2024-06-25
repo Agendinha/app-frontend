@@ -1,6 +1,11 @@
 import "./sidebar.css";
 import PropTypes from "prop-types";
 
+const logout = () => {
+	localStorage.removeItem("access_token");
+	window.location.href = "/login";
+};
+
 const Sidebar = ({ onCloseSidebar, isOpen }) => {
 	return (
 		<div className={`sidebar ${isOpen ? "open" : "closed"}`}>
@@ -25,7 +30,7 @@ const Sidebar = ({ onCloseSidebar, isOpen }) => {
 					<i className="fas fa-chevron-right"></i> Lorem ipsum
 				</li>
 			</ul>
-			<div className="sidebar-footer">
+			<div className="sidebar-footer" onClick={logout} style={{ cursor: "pointer" }}>
 				<i className="fas fa-sign-out-alt"></i> Logout
 			</div>
 			<div className="sidebar-copyright">

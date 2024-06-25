@@ -64,6 +64,7 @@ const HourList = ({ hours, values, updateValues, checkAvailability, handleNewEve
   );
 };
 
+
 HourList.propTypes = {
   hours: PropTypes.arrayOf(PropTypes.string).isRequired,
   values: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -74,3 +75,4 @@ HourList.propTypes = {
 };
 
 export default HourList;
+
