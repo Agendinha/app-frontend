@@ -3,6 +3,7 @@ import Logo from "../../assets/logo";
 import { Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import { config } from '@/config';
 
 export default function Login() {
 	const [username, setUsername] = useState("");
@@ -26,8 +27,7 @@ export default function Login() {
 				setIsLoading(false);
 				return;
 			}
-			const response = await fetch(
-				"https://api.agendinha.online/api/v1/",
+			const response = await fetch(`${config.apiUrl}/api/v1/`,
 				{
 					method: "POST",
 					headers: {

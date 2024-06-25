@@ -1,3 +1,4 @@
+import { config } from '@/config';
 import { useState, useEffect } from 'react';
 import HourList from './hoursList.jsx';
 import { format, addDays, startOfWeek, isWeekend, isBefore, parseISO } from 'date-fns';
@@ -45,7 +46,7 @@ export default function Days() {
   });
 
   useEffect(() => {
-    fetch('http://localhost:8001/api/v1/schedules')
+    fetch(`${config.apiUrl}/api/v1/schedules`)
       .then(response => response.json())
       .then(data => setEvents(data))
       .catch(error => console.error('Error fetching schedule:', error));
@@ -117,7 +118,7 @@ export default function Days() {
           start_time
         };
 
-        fetch('http://localhost:8001/api/v1/schedules', {
+        fetch(`${config.apiUrl}/api/v1/schedules`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -135,7 +136,7 @@ export default function Days() {
   };
 
   const handleDeleteEvent = (eventId) => {
-    fetch(`http://localhost:8001/api/v1/schedules/${eventId}`, {
+    fetch(`${config.apiUrl}/api/v1/schedules/${eventId}`, {
       method: 'DELETE',
     })
       .then(() => {
