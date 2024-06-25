@@ -1,3 +1,4 @@
+import { config } from '@/config';
 import { useState } from "react";
 import Logo from "../../assets/logo";
 import { Loader2 } from "lucide-react";
@@ -13,7 +14,7 @@ export default function Login() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:8001/api/v1/login/', {
+      const response = await fetch(`${config.apiUrl}/api/v1/login/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
