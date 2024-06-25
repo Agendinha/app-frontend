@@ -13,7 +13,7 @@ export default function Login() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await fetch('https://api.agendinha.online/api/v1/login/', {
+      const response = await fetch('http://localhost:8001/api/v1/login/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -26,8 +26,12 @@ export default function Login() {
 
 
         const data = await response.json();
+        const user = data.user;
         localStorage.setItem('access_token', data.access_token);
-
+        localStorage.setItem('userId', user.id);
+        localStorage.setItem('usertype', user.usertype);
+        localStorage.setItem('username', user.username);
+        localStorage.setItem('userEmail', user.email);
         return navigate('/');
 
       } else {
