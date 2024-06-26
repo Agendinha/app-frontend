@@ -123,7 +123,7 @@ export default function Days() {
           start_time
         };
 
-        fetch(`${config.apiUrl}/v1/schedules`, {
+        fetch(`${config.apiUrl}/v1/schedules/`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
