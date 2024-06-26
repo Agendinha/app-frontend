@@ -29,8 +29,26 @@ export default function Login() {
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify({ username, email, password, usertype:"cliente"}),
+					redirect: 'follow'
 				}
 			);
+
+			if (response.redirected) {
+                const redirectedResponse = await fetch(response.url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ username, email, password, usertype: "cliente" })
+                });
+
+                if (redirectedResponse.ok) {
+                    swal("Sucesso", "Conta criada com sucesso!", "success");
+                    return navigate("/login");
+                } else {
+                    throw new Error('Redirected request failed');
+                }
+            }
 
 			if (response.ok) {
 				swal("Sucesso", "Conta criada com sucesso!", "success");
