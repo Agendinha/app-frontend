@@ -46,7 +46,7 @@ export default function Days() {
   });
 
   useEffect(() => {
-    fetch(`${config.apiUrl}/v1/schedules`)
+    fetch(`${config.apiUrl}/v1/schedules/`)
       .then(response => response.json())
       .then(data => setEvents(data))
       .catch(error => console.error('Error fetching schedule:', error));
@@ -141,7 +141,7 @@ export default function Days() {
   };
 
   const handleDeleteEvent = (eventId) => {
-    fetch(`${config.apiUrl}/v1/schedules/${eventId}`, {
+    fetch(`${config.apiUrl}/v1/schedules/${eventId}/`, {
       method: 'DELETE',
     })
       .then(() => {
