@@ -33,7 +33,9 @@ const HourList = ({ hours, values, updateValues, checkAvailability, handleNewEve
                   </button>
                 </div>
               ) : (
-                <span className="text-red-500">{availability.message}</span>
+                <div className="flex flex-col items-center justify-center w-8/12">
+                  <span className="text-red-500 text-center py-1">{availability.message}</span>
+                </div>
               )
             ) : (
               values[index] === '' ? (
@@ -64,7 +66,6 @@ const HourList = ({ hours, values, updateValues, checkAvailability, handleNewEve
   );
 };
 
-
 HourList.propTypes = {
   hours: PropTypes.arrayOf(PropTypes.string).isRequired,
   values: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -75,4 +76,3 @@ HourList.propTypes = {
 };
 
 export default HourList;
-

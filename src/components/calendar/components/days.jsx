@@ -141,7 +141,7 @@ export default function Days() {
   };
 
   const handleDeleteEvent = (eventId) => {
-    fetch(`${config.apiUrl}/v1/schedules/${eventId}/`, {
+    fetch(`${config.apiUrl}/v1/schedules/${eventId}`, {
       method: 'DELETE',
     })
       .then(() => {
