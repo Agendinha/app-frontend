@@ -23,7 +23,7 @@ export default function Days() {
   const getAvailableDates = () => {
     const today = new Date();
     let startDate = startOfWeek(today, { weekStartsOn: 6 });
-
+    
     if (isBefore(today, startDate)) {
       startDate = addDays(startDate, -7);
     }
@@ -46,7 +46,7 @@ export default function Days() {
   });
 
   useEffect(() => {
-    fetch(`${config.apiUrl}/api/v1/schedules`)
+    fetch(`${config.apiUrl}/v1/schedules`)
       .then(response => response.json())
       .then(data => setEvents(data))
       .catch(error => console.error('Error fetching schedule:', error));
@@ -73,6 +73,7 @@ export default function Days() {
   const checkAvailability = (date, time) => {
     const dateTime = new Date(`${date}T${time}:00`);
     const userId = localStorage.getItem('userId');
+    const userType = localStorage.getItem('usertype');
     const event = events.find(event => {
       const eventTime = parseISO(event.start_time);
       return eventTime.getTime() === dateTime.getTime();
@@ -82,19 +83,21 @@ export default function Days() {
       if (event.customer_id == userId) {
         return { isAvailable: false, message: `Você reservou esse horário para ${event.service}`, isOwner: true, eventId: event.id };
       }
+      else if (userType === 'admin'){
+        return { isAvailable: false, message: `${event.username} - ${event.service} `, isOwner: true, eventId: event.id };
+      }
       return { isAvailable: false, message: 'Horário indisponível', isOwner: false };
     }
     return { isAvailable: true };
   };
 
   const handleNewEvent = (time) => {
+    const userType = localStorage.getItem('usertype');
+    const inputOptions = userType === 'cliente' ? { barba: 'Barba', cabelo: 'Cabelo' } : { folga: 'Folga'};
     Swal.fire({
       title: 'Selecione o serviço que deseja reservar',
       input: 'select',
-      inputOptions: {
-        barba: 'Barba',
-        cabelo: 'Cabelo'
-      },
+      inputOptions: inputOptions,
       inputPlaceholder: 'Selecione o serviço',
       showCancelButton: true,
       inputValidator: (value) => {
@@ -110,15 +113,17 @@ export default function Days() {
       if (result.isConfirmed) {
         const service = result.value;
         const customer_id = localStorage.getItem('userId');
+        const username = localStorage.getItem('username');
         const start_time = `${selectedDate}T${time}:00`;
 
         const newEvent = {
           customer_id,
+          username,
           service,
           start_time
         };
 
-        fetch(`${config.apiUrl}/api/v1/schedules`, {
+        fetch(`${config.apiUrl}/v1/schedules`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -136,7 +141,7 @@ export default function Days() {
   };
 
   const handleDeleteEvent = (eventId) => {
-    fetch(`${config.apiUrl}/api/v1/schedules/${eventId}`, {
+    fetch(`${config.apiUrl}/v1/schedules/${eventId}`, {
       method: 'DELETE',
     })
       .then(() => {

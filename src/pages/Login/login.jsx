@@ -14,7 +14,7 @@ export default function Login() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await fetch(`${config.apiUrl}/api/v1/login/`, {
+      const response = await fetch(`${config.apiUrl}/v1/login/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

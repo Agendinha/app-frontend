@@ -22,12 +22,7 @@ export default function Login() {
 				setIsLoading(false);
 				return;
 			}
-			if(username.includes(" ")){
-				swal("Ops!", "O nome de usuário não pode conter espaços!", "error");
-				setIsLoading(false);
-				return;
-			}
-			const response = await fetch(`${config.apiUrl}/api/v1/`,
+			const response = await fetch(`${config.apiUrl}/v1/register`,
 				{
 					method: "POST",
 					headers: {
@@ -72,13 +67,13 @@ export default function Login() {
 							htmlFor="username"
 							className="absolute left-4 top-0 text-sm text-black"
 						>
-							Usuário
+							Nome e Sobrenome
 						</label>
 						<input
 							id="username"
 							className="bg-white p-3 mb-2 rounded-md text-black"
 							type="text"
-							placeholder="johnDoe"
+							placeholder="John Doe"
 							value={username}
 							onChange={(e) => setUsername(e.target.value)}
 						/>
